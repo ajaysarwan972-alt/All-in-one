@@ -18,7 +18,7 @@ height:100vh;
 }
 
 .box{
-background:white;
+background:#fff;
 padding:30px;
 border-radius:15px;
 text-align:center;
@@ -28,6 +28,7 @@ box-shadow:0 0 15px rgba(0,0,0,.3);
 
 h2{
 margin-bottom:10px;
+color:#000;
 }
 
 p{
@@ -51,16 +52,25 @@ opacity:.9;
 }
 </style>
 
+<script>
+function downloadAPK(){
+window.location.href="https://katbdbzoufiblnnsoxkk.supabase.co/storage/v1/object/public/apk/Badshah.apk";
+}
+</script>
+
 </head>
+
 <body>
 
 <div class="box">
-<h2>Download Our App</h2>
-<p>Click the button below to download the APK.</p>
 
-<a href="DOC-20260617-WA0043.apk" download>
-<button>⬇ DOWNLOAD APK</button>
-</a>
+<h2>Download Our App</h2>
+
+<p>Click below to download the latest APK</p>
+
+<button onclick="downloadAPK()">
+⬇ DOWNLOAD APK
+</button>
 
 </div>
 
