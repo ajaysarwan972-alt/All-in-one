@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APK Upload Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:30px;
+text-align:center;
+}
+.box{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:400px;
+margin:auto;
+box-shadow:0 0 10px #ccc;
+}
+button{
+padding:12px 20px;
+font-size:18px;
+margin-top:15px;
+width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>APK Upload</h2>
+
+<input type="file" id="apkFile" accept=".apk">
+
+<button onclick="uploadAPK()">Upload APK</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+
+const supabaseUrl="https://katbdbzoufiblnnsoxkk.supabase.co";
+const supabaseKey="YOUR_SUPABASE_KEY";
+
+const supabase=window.supabase.createClient(supabaseUrl,supabaseKey);
+
+async function uploadAPK(){
+
+const file=document.getElementById("apkFile").files[0];
+
+if(!file){
+alert("Select APK");
+return;
+}
+
+document.getElementById("msg").innerHTML="Uploading...";
+
+const {error}=await supabase.storage
+.from("apk")
+.upload("app.apk",file,{
+upsert:true
+});
+
+if(error){
+document.getElementById("msg").innerHTML=error.message;
+}
+else{
+document.getElementById("msg").innerHTML="Upload Success";
+}
+
+}
+
+</script>
+
+</body>
+</html>
