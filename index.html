@@ -3,92 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APNA PORTAL</title>
+<title>Game Menu</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
-background:linear-gradient(135deg,#0f172a,#1e3a8a,#0f766e);
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+    margin:0;
+    background:#f2f2f2;
+    font-family:Arial,sans-serif;
 }
 
-.box{
-width:95%;
-max-width:420px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-padding:25px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(0,0,0,.4);
-text-align:center;
-}
-
-h1{
-color:white;
-margin-bottom:20px;
-font-size:28px;
-letter-spacing:2px;
+.menu{
+    display:flex;
+    justify-content:space-around;
+    padding:15px 5px;
+    margin-top:20px;
 }
 
 .btn{
-display:block;
-text-decoration:none;
-background:linear-gradient(45deg,#ff9800,#ff5722);
-color:white;
-padding:15px;
-margin:12px 0;
-font-size:18px;
-font-weight:bold;
-border-radius:50px;
-transition:.3s;
-box-shadow:0 5px 15px rgba(0,0,0,.3);
+    width:18%;
+    padding:12px 5px;
+    border:none;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.btn:hover{
-transform:scale(1.05);
-background:linear-gradient(45deg,#00c853,#2196f3);
-}
-
-.footer{
-color:white;
-margin-top:15px;
-font-size:13px;
-opacity:.8;
-}
+.jodi{background:#6c5ce7;}
+.haruf{background:#00b894;}
+.crossing{background:#0984e3;}
+.copy{background:#e17055;}
+.type{background:#111;}
 </style>
-
 </head>
 
 <body>
 
-<div class="box">
+<div class="menu">
 
-<h1>APNA PORTAL</h1>
+<button class="btn jodi" onclick="location.href='jodi.html'">
+JODI
+</button>
 
-<a class="btn" href="apnadost.html">👥 APNE DOST</a>
+<button class="btn haruf" onclick="location.href='haruf.html'">
+HARUF
+</button>
 
-<a class="btn" href="apnabazar.html">🛒 APNA BAZAR</a>
+<button class="btn crossing" onclick="location.href='crossing.html'">
+CROSSING
+</button>
 
-<a class="btn" href="localjob.html">💼 LOCAL JOB</a>
+<button class="btn copy" onclick="location.href='copy.html'">
+COPY
+</button>
 
-<a class="btn" href="sattaking.html">🎯 SATTA KING PLAY</a>
-
-<a class="btn" href="playindia.html">🎲 PLAY INDIA LOTTERY</a>
-
-<a class="btn" href="apnasaman.html">📦 APNA SAMAN</a>
-
-<div class="footer">
-Made with ❤️
-</div>
+<button class="btn type" onclick="location.href='play.html'">
+TYPE/IMAGE
+</button>
 
 </div>
 
