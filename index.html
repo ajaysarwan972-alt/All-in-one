@@ -1,67 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Menu</title>
 
 <style>
 body{
-    margin:0;
-    background:#f2f2f2;
-    font-family:Arial,sans-serif;
+margin:0;
+font-family:Arial,sans-serif;
+background:#e5e7eb;
 }
 
-.menu{
-    display:flex;
-    justify-content:space-around;
-    padding:15px 5px;
-    margin-top:20px;
+.header{
+position:fixed;
+top:10px;
+left:10px;
+right:10px;
+background:#fff;
+padding:10px;
+border-radius:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
-.btn{
-    width:18%;
-    padding:12px 5px;
-    border:none;
-    border-radius:20px;
-    color:white;
-    font-size:12px;
-    font-weight:bold;
-    cursor:pointer;
+#menuBtn{
+font-size:24px;
+cursor:pointer;
 }
 
-.jodi{background:#6c5ce7;}
-.haruf{background:#00b894;}
-.crossing{background:#0984e3;}
-.copy{background:#e17055;}
-.type{background:#111;}
+#userId{
+background:green;
+color:#fff;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+#wallet{
+background:red;
+color:#fff;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+.topBtns{
+margin-top:80px;
+display:flex;
+justify-content:space-around;
+padding:0 5px;
+}
+
+.topBtn{
+width:18%;
+padding:10px 5px;
+border-radius:20px;
+color:#fff;
+text-align:center;
+font-size:12px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn1{background:#6c5ce7;}
+.btn2{background:#00b894;}
+.btn3{background:#0984e3;}
+.btn4{background:#e17055;}
+.btn5{background:#111;}
 </style>
+
 </head>
 
 <body>
 
-<div class="menu">
+<div class="header">
+<div id="menuBtn">☰</div>
 
-<button class="btn jodi" onclick="location.href='jodi.html'">
-JODI
-</button>
+<div id="userId">
+ID : 0
+</div>
 
-<button class="btn haruf" onclick="location.href='haruf.html'">
-HARUF
-</button>
+<div id="wallet">
+₹ 0
+</div>
+</div>
 
-<button class="btn crossing" onclick="location.href='crossing.html'">
-CROSSING
-</button>
+<div class="topBtns">
+<div class="topBtn btn1" onclick="location='jodi.html'">JODI</div>
 
-<button class="btn copy" onclick="location.href='copy.html'">
-COPY
-</button>
+<div class="topBtn btn2" onclick="location='haruf.html'">HARUF</div>
 
-<button class="btn type" onclick="location.href='play.html'">
-TYPE/IMAGE
-</button>
+<div class="topBtn btn3" onclick="location='crossing.html'">CROSSING</div>
 
+<div class="topBtn btn4" onclick="location='copy.html'">COPY</div>
+
+<div class="topBtn btn5" onclick="location='play.html'">TYP/IMAGE</div>
 </div>
 
 </body>
