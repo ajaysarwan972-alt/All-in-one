@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jodi Game</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#e5e7eb;
+padding-bottom:80px;
+}
+.container{
+margin:10px;
+padding:15px;
+background:#fff;
+border-radius:15px;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+.box{
+background:#fff;
+border:1px solid #ddd;
+border-radius:10px;
+padding:10px;
+text-align:center;
+}
+input{
+width:100%;
+padding:8px;
+margin-top:5px;
+border-radius:8px;
+border:1px solid #ccc;
+box-sizing:border-box;
+}
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+display:flex;
+}
+.total{
+width:50%;
+background:linear-gradient(to right,blue,red);
+color:#fff;
+padding:15px;
+text-align:center;
+font-weight:bold;
+}
+.submit{
+width:50%;
+background:green;
+color:#fff;
+padding:15px;
+text-align:center;
+font-weight:bold;
+cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div id="header"></div>
+
+<script>
+fetch("header.html")
+.then(r=>r.text())
+.then(d=>{
+document.getElementById("header").innerHTML=d;
+});
+</script>
+
+<div style="height:90px;"></div>
+
+<div class="container">
+<div class="grid" id="jodiGrid"></div>
+</div>
+
+<div class="bottom">
+<div class="total" id="total">₹ 0</div>
+<div class="submit" onclick="submitAll()">SUBMIT</div>
+</div>
+
+<script>
+
+function onlyNumber(i){
+i.value=i.value.replace(/[^0-9]/g,'');
+}
+
+const client=supabase.createClient(
+"https://katbdbzoufiblnnsoxkk.supabase.co",
+"YOUR_SUPABASE_PUBLISHABLE_KEY"
+);
+
+const user=JSON.parse(localStorage.getItem("user"));
+
+let dataArr=[];
+let total=0;
+
+function updateTotal(){
+
+total=0;
+
+dataArr.forEach(x=>{
+total+=x.amount;
+});
+
+document.getElementById("total").innerHTML="₹ "+total;
+
+}
+
+for(let i=0;i<100;i++){
+
+let num=i.toString().padStart(2,'0');
+
+jodiGrid.innerHTML+=`
+
+<div class="box">
+
+${num}
+
+<input
+type="tel"
+inputmode="numeric"
+oninput="onlyNumber(this);addData('${num}',this.value)">
+
+</div>
+
+`;
+
+}
+
+function addData(num,val){
+
+val=Number(val)||0;
+
+dataArr=dataArr.filter(x=>x.number!=num);
+
+if(val>0){
+
+dataArr.push({
+number:num,
+amount:val
+});
+
+}
+
+updateTotal();
+
+}
+  // SUBMIT FUNCTION
+
+async function submitAll(){
+
+if(dataArr.length==0){
+alert("Kuch Add Karo");
+return;
+}
+
+// Wallet Balance
+
+let {data:userData,error}=await client
+.from("login")
+.select("balance")
+.eq("id",user.id)
+.single();
+
+if(error){
+alert("User Error");
+return;
+}
+
+// Low Balance Check
+
+if(userData.balance<total){
+alert("LOW BALANCE");
+return;
+}
+
+// Balance Cut
+
+await client
+.from("login")
+.update({
+balance:userData.balance-total
+})
+.eq("id",user.id);
+
+// History Save
+
+const market=localStorage.getItem("market")||"UNKNOWN";
+
+await client
+.from("history")
+.insert([{
+
+user_id:user.id,
+
+market:market,
+
+data:dataArr,
+
+total:total,
+
+created_at:new Date().toISOString()
+
+}]);
+
+alert("GAME OK");
+
+// Reset
+
+dataArr=[];
+
+total=0;
+
+updateTotal();
+
+document
+.querySelectorAll("input")
+.forEach(i=>i.value="");
+
+}
